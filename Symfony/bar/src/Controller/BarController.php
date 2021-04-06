@@ -15,4 +15,12 @@ class BarController extends AbstractController
     {
         return $this->render('bar/index.html.twig');
     }
+
+    /**
+     * @Route("/mention", name="mention")
+     */
+    public function mention()
+    {
+        return $this->render('mention/index.html.twig');
+    }
 }
