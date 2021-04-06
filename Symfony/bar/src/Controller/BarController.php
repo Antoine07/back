@@ -52,6 +52,22 @@ class BarController extends AbstractController
         return $this->render('mention/index.html.twig');
     }
 
+    /**
+     * @Route("/beers", name="beers")
+     */
+    public function beers()
+    {
+        // dd($this->beers_api()['beers']);
+
+        return $this->render(
+            'beers/index.html.twig',
+            [
+                'beers' => $this->beers_api()['beers'],
+                'title' => 'Page beers'
+            ]
+        );
+    }
+
     private function beers_api(): array
     {
         $response = $this->client->request(
