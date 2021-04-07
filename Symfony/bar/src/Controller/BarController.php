@@ -166,4 +166,41 @@ class BarController extends AbstractController
 
         return new Response('Saved new category with id ');
     }
+
+    /**
+     * @Route("/seeds", name="seeds")
+     */
+    public function createSeeds()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $categories = ['Brune', 'Chataigne', 'Houblon', 'Poivré'];
+
+        foreach($categories as $cat){
+            $category = new Category();
+            $category->setName($cat);
+            $entityManager->persist($category);
+
+            $entityManager->flush();
+        }
+
+        $categoryRepo = $entityManager->getRepository(Category::class);
+
+        $beer = new Beer();
+        $beer->setname('Ardèche');
+        $beer->setPublishedAt(new \DateTime());
+        $beer->setDescription('Bière d\'Ardèche');
+
+        foreach($categories as $cat){
+            $category = $categoryRepo->findOneBy(['name' => $cat]);
+            $beer->addCategory($category); // on ajoute l'objet
+        }
+
+        $entityManager->persist($beer);
+
+        $entityManager->flush();
+
+        dump($beer->getCategories(), 'ici');
+
+        return new Response('Saved new category with id ' . $beer->getId());
+    }
 }
