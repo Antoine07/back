@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+use App\Entity\Beer;
+
 class BarController extends AbstractController
 {
 
@@ -85,5 +87,28 @@ class BarController extends AbstractController
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
 
         return $content;
+    }
+
+    /**
+     * @Route("/newbeer", name="create_beer")
+    */
+    public function createBeer(){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // création d'une entité
+        $beer = new Beer();
+        // hydratation de l'entité
+        $beer->setname('Super Beer');
+        $beer->setPublishedAt(new \DateTime());
+        $beer->setDescription('Ergonomic and stylish!');
+
+        // mode transaction => on peut toujours revenir en arrière, base de données relationnelles
+        // 1. tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($beer);
+
+        // 2. actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Saved new beer with id '.$beer->getId());
     }
 }
