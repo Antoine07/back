@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 use App\Entity\Beer;
+use App\Entity\Category;
 
 class BarController extends AbstractController
 {
@@ -91,8 +92,9 @@ class BarController extends AbstractController
 
     /**
      * @Route("/newbeer", name="create_beer")
-    */
-    public function createBeer(){
+     */
+    public function createBeer()
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         // création d'une entité
@@ -109,6 +111,59 @@ class BarController extends AbstractController
         // 2. actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return new Response('Saved new beer with id '.$beer->getId());
+        return new Response('Saved new beer with id ' . $beer->getId());
+    }
+
+    /**
+     * @Route("/newcat", name="create_category")
+     */
+    public function createCategory()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // création d'une entité
+        $category = new Category();
+        // hydratation de l'entité
+        $category->setname('Houblon');
+        $category->setDescription('Ergonomic and stylish!');
+
+        // mode transaction => on peut toujours revenir en arrière, base de données relationnelles
+        // 1. tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($category);
+
+        // 2. actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Saved new category with id ' . $category->getId());
+    }
+
+    /**
+     * @Route("/newcatbeer", name="create_category_beer")
+     */
+    public function createCategoryBeer()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // de faire des requêtes SQL sur les tables en PHP
+        $beerRepo = $entityManager->getRepository(Beer::class);
+
+        // récupérer toutes les bières avec le repository
+        // dd($beerRepo->findAll());
+
+        // création d'une entité
+        $category = new Category();
+        // hydratation de l'entité
+        $category->setname('blonde');
+        $category->setDescription('bière blonde');
+
+        foreach($beerRepo->findAll() as $beer)
+            $category->addBeer($beer);
+
+        $entityManager->persist($category);
+
+        $entityManager->flush();
+
+
+        return new Response('Saved new category with id ');
     }
 }
