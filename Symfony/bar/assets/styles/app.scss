@@ -1,5 +1,13 @@
-body {
-    background-color: lightgray;
-}
-
 @import "~bootstrap/scss/bootstrap";
+
+$color-link : red;
+
+a:hover {
+  text-decoration: none;
+}
+.active-bar {
+  color: $color-link ;
+  &:hover {
+    text-decoration: none;
+  }
+}
