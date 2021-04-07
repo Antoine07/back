@@ -506,7 +506,7 @@ Puis utilisez dans le template le helper (fonction Symfony) suivant : path, cré
 Utilisez le helper path, créez un lien vers une page d'accueil, un lien vers la page affichant les bières et enfin un lien vers les mentions légales :
 
 ```html
-<!-- dans le menu -->
+<!-- dans le menu home est le nom de la route par le lien physique -->
 <a href="{{ path('home') }}">Home</a>
 
 {# show_beer nom de la route #}
@@ -520,6 +520,9 @@ Définissez une classe active sur les liens actifs. Utilisez la syntaxe suivante
 
 ```html
 {% set route_name = app.request.attributes.get('_route') %}
+
+{# Ici une condition simple pour afficher une chaîne de caractères dans le template #}
+{% if route_name is defined and true %} Je suis une route {% endif %}
 ```
 
 ## Exercice images statiques
