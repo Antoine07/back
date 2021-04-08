@@ -54,6 +54,11 @@ class Beer
      */
     private $degree;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $abstract;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -159,6 +164,18 @@ class Beer
     public function setDegree(?string $degree): self
     {
         $this->degree = $degree;
+
+        return $this;
+    }
+
+    public function getAbstract(): ?string
+    {
+        return $this->abstract;
+    }
+
+    public function setAbstract(?string $abstract): self
+    {
+        $this->abstract = $abstract;
 
         return $this;
     }
