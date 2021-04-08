@@ -33,6 +33,21 @@ class BarController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/beer/{id}", name="show_beer")
+     */
+    public function showBeer(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Beer::class);
+
+        $beer = $repository->find($id);
+
+        return $this->render('home/single.html.twig', [
+            'beer' => $beer,
+            'title' => "Page de la bière {$beer->getName()}"
+        ]);
+    }
+
     /**
      * @Route("/mention", name="mention")
      */

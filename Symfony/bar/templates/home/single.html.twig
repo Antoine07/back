@@ -6,15 +6,11 @@
 
 {% block body %}
 	<div class="row">
-		{% for beer in beers %}
-			<div class="col-sm-6">
-				<div class="card card__beers">
-					<div class="card-body">
-						<h5 class="card-title">
-											{# /beer/{id} #}
-							<a href="{{ path('show_beer', { 'id' : beer.id }) }}">
-								{{ beer.name }}
-							</a>
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">
+                            {{ beer.name }}
 						</h5>
 						{% if beer.publishedAt is defined %}
 							<p>Date de création :
@@ -30,7 +26,7 @@
 							Degree:
 							{{ beer.degree ?? 'no degree' }}</p>
 						<div>
-							{{ beer.abstract ?? 'no description' }}
+							{{ beer.description ?? 'no description' }}
 						</div>
 						{% if beer.country %}
 							<p>Country:
@@ -41,9 +37,8 @@
 						<div>
 							<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
 						</div>
-					</div>
 				</div>
 			</div>
-		{% endfor %}
+		</div>
 	</div>
 {% endblock %}
