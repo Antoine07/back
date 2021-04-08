@@ -1,4 +1,4 @@
-# Complément sur Doctrine et les entités à mettre en place
+# Complément sur Doctrine et les entités
 
 ## Création des countries
 
