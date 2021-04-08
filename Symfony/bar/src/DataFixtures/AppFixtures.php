@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Beer;
+use App\Entity\Category;
 use App\Entity\Country;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -17,10 +18,29 @@ class AppFixtures extends Fixture
 
         $countries = ['belgium', 'french', 'English', 'germany'];
 
+        $catNormals = ['blonde', 'brune', 'rousse'] ;
+        $catSpecials = ['houblon', 'rose', 'reglisse', 'marron', 'whisky', 'bio'] ;
+
+        foreach($catNormals as $name){
+            $category = new Category;
+            $category->setName($name);
+            $manager->persist($category);
+        }
+
+        $manager->flush();
+
+        foreach($catSpecials as $name){
+            $category = new Category;
+            $category->setName($name);
+            $category->setTerm('special');
+            $manager->persist($category);
+        }
+
+        $manager->flush();
+
         foreach($countries as $name){
             $country = new Country;
             $country->setName($name);
-
             $manager->persist($country);
         }
 
@@ -42,9 +62,13 @@ class AppFixtures extends Fixture
             'beer normal',
         ];
 
-
         $repository= $manager->getRepository(Country::class);
         $countries = $repository->findAll();
+
+        $repoCat= $manager->getRepository(Category::class);
+        //  dump($repoCat->findByTerm('normal'));
+        $catNormals = $repoCat->findByTerm('normal');
+        $catSpeclials = $repoCat->findByTerm('special');
 
         $count = 0;
         while($count < 20){
@@ -60,6 +84,18 @@ class AppFixtures extends Fixture
             $beer->setDegree(rand(5, 12));
             if( rand(0,6) < 5 )
                 $beer->setCountry($countries[rand(0, count($countries) - 1)]);
+
+            $beer->addCategory($catNormals[rand(0, count($catNormals) - 1) ]);
+
+            $countRand = rand(2, count($catSpeclials) - 1 );
+            $i = 0;
+            shuffle($catSpeclials);
+            // [b, a, d, c]
+            while($countRand > 0){
+                $beer->addCategory($catSpeclials[$i] );
+                $countRand--;
+                $i++;
+            }
 
             $manager->persist($beer); // 1. ce n'est effectif au niveau de l'insert ceci peut être défait, on peut revenir en arrière
             $count++;

@@ -18,6 +18,7 @@ class BarController extends AbstractController
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
+       
     }
 
     /**
@@ -40,6 +41,9 @@ class BarController extends AbstractController
     public function showBeer(int $id)
     {
         $repository = $this->getDoctrine()->getRepository(Beer::class);
+
+        $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
+        dump($repositoryCategory->findByTerm('special'));
 
         $beer = $repository->find($id);
 

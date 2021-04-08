@@ -28,7 +28,7 @@
 						<div>
 							{{ beer.description ?? 'no description' }}
 						</div>
-						{% if beer.country %}
+						{% if beer.country is defined %}
 							<p>Country:
 								{{ beer.country.name }}</p>
 						{% else %}

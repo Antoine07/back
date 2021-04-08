@@ -33,7 +33,7 @@
 						<div>
 							{{ beer.abstract ?? 'no description' }}
 						</div>
-						{% if beer.country %}
+						{% if beer.country  %}
 							<p>Country:
 								<a href="{{ path('show_country_beers', { 'id' : beer.country.id }) }}">
 									{{ beer.country.name }}
