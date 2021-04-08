@@ -35,11 +35,9 @@ Twig
 Votre url aura la forme suivante : http://localhost:8000/country/1
 notez que country_beer est le nom de votre route (voir les annotations)
 #}
-{% if beer.country %}
-    <a href="{{ path('beer', { 'id' : beer.id }) }}">
-        {{ beer.name }}
-    </a>
-{% endif %}
+<a href="{{ path('beer', { 'id' : beer.id }) }}">
+   {{ beer.name }}
+</a>
 ```
 
 Pour récupérer une bière à l'aide du repository de la bière vous utiliserez la méthode find pour récupérer l'entité hydraté Beer correspondant.
