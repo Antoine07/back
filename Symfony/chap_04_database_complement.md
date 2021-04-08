@@ -106,7 +106,7 @@ class BarController extends AbstractController
 }
 ```
 
-Affichez maintenant les catégories de chacune des bières sous chaque bière dans la page d'une bière.
+Affichez maintenant les catégories spéciales uniquement (faites une condition) de chacune des bières sous chaque bière dans la page d'une bière.
 
 ## Main menu
 
