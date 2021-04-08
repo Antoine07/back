@@ -11,11 +11,16 @@
 				<div class="card card__beers">
 					<div class="card-body">
 						<h5 class="card-title">{{ beer.name }}</h5>
-						<p>Degree :
-							{{ beer.degree ?? 'no degree' }}
+						{% if beer.publishedAt is defined %}
+						<p>Date de création :
+							{{ beer.publishedAt | date('d-m-Y h:m:s') }}
 						</p>
+						{% endif %}
 						<div>
-						<img src="{{ asset('build/images/beer_00.jpeg') }}" />
+							{{ beer.description ?? 'no description' }}
+						</div>
+						<div>
+							<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
 						</div>
 					</div>
 				</div>
