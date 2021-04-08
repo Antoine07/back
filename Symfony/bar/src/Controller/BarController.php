@@ -10,6 +10,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 use App\Entity\Beer;
 use App\Entity\Category;
+use App\Entity\Country;
 
 class BarController extends AbstractController
 {
@@ -45,6 +46,21 @@ class BarController extends AbstractController
         return $this->render('home/single.html.twig', [
             'beer' => $beer,
             'title' => "Page de la bière {$beer->getName()}"
+        ]);
+    }
+
+      /**
+     * @Route("/country/{id}", name="show_country_beers")
+     */
+    public function showCountryBeer(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Country::class);
+
+        $country = $repository->find($id);
+
+        return $this->render('country/index.html.twig', [
+            'beers' => $country->getBeers(),
+            'title' => $country->getName()
         ]);
     }
 

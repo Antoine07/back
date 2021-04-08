@@ -1,44 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ title }}
+	Page du pays  {{ title }}
 {% endblock %}
 
 {% block body %}
 	<div class="row">
+		<h1>Bière(s) du pays : {{ title }} </h1>
 		{% for beer in beers %}
 			<div class="col-sm-6">
 				<div class="card card__beers">
 					<div class="card-body">
-						<h5
-							class="card-title">
-							{# /beer/{id} #}
-							<a href="{{ path('show_beer', { 'id' : beer.id }) }}">
-								{{ beer.name }}
-							</a>
-						</h5>
+						<h5 class="card-title">{{ beer.name }}</h5>
 						{% if beer.publishedAt is defined %}
 							<p>Date de création :
 								{{ beer.publishedAt | date('d-m-Y h:m:s') }}
 							</p>
 						{% endif %}
 						<p>
-							{% if beer.price is defined  %}
-								Price:
-								{{ beer.price }}
-								&euro;
-							{% endif %}
+							{% if beer.price is defined  %} Price: {{ beer.price }} &euro; {% endif %}
 							Degree:
 							{{ beer.degree ?? 'no degree' }}</p>
 						<div>
 							{{ beer.abstract ?? 'no description' }}
 						</div>
 						{% if beer.country %}
-							<p>Country:
-								<a href="{{ path('show_country_beers', { 'id' : beer.country.id }) }}">
-									{{ beer.country.name }}
-								</a>
-							</p>
+							<p>Country: {{ beer.country.name }}</p>
 						{% else %}
 							<p>Pas de pays</p>
 						{% endif %}
