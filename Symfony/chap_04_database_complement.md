@@ -80,21 +80,33 @@ Créez ces catégories et associées ces catégories aux bières déjà créés 
 
 Vous allez créer maintenant dans le repository CategoryRepository une méthode findByTerm, elle permettra de récupérer les catégories selon leur terme propre.
 
-Affichez pour l'instant dans un dump dans le constructeur du Controller BarController pour vérifier que vous récupérez bien ces catégories.
+Affichez pour l'instant dans un dump dans la méthode showBeer les catégories spéciales et normales comme suit :
 
 ```php
 class BarController extends AbstractController
 {
 
-    public function __construct()
+     /**
+     * @Route("/beer/{id}", name="show_beer")
+     */
+    public function showBeer(int $id)
     {
-        $repository = $this->getDoctrine()->getRepository(Category::class);
-        dump($repository->findByTerm('special'));
-    }
+        $repository = $this->getDoctrine()->getRepository(Beer::class);
+        $beer = $repository->find($id);
 
-    //...
+        $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
+        dump($repositoryCategory->findByTerm('special'));
+        dump($repositoryCategory->findByTerm('normal'));
+
+        return $this->render('home/single.html.twig', [
+            'beer' => $beer,
+            'title' => "Page de la bière {$beer->getName()}"
+        ]);
+    }
 }
 ```
+
+Affichez maintenant les catégories de chacune des bières sous chaque bière dans la page d'une bière.
 
 ## Main menu
 
@@ -114,9 +126,9 @@ Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi 
 
 Vous allez maintenant affichez les bières par catégorie, en effet, dans le menu principal vous créez les liens vers les catégories affichant les bières de cette catégorie.
 
-## TP synthèse facultatif
+## TP synthèse
 
-*Dans la suite vous pouvez utiliser le logiciel Dia pour modèliser les relations entre les tables.*
+*Dans la suite vous pouvez utiliser une feuille de papier pour modéliser les relations.*
 
 Vous allez implémenter une nouvelle entité Client elle permettra de faire un peu de statistique sur la consommation de bière(s) des clients. Cette table nous renseignera plus précisémenet sur le poids et la consommation de nos clients. Un client peut consommer plusieurs types de bières. Nous essayerons de regrouper ces informations sous forme d'un tableau sur une page de notre application.
 
