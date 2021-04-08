@@ -24,25 +24,11 @@ class BarController extends AbstractController
      */
     public function index()
     {
-        // var_dump de symfony
-        // dd([
-        //     'b1' => 1,
-        //     'b2' => 2,
-        //     'b3' => 3
-        // ]);
+       
+        $repository = $this->getDoctrine()->getRepository(Beer::class);
 
-        // dump([
-        //     'b1' => 1,
-        //     'b2' => 2,
-        //     'b3' => 3
-        // ]);
-
-        return $this->render('bar/index.html.twig', [
-            'beers' => [
-                'b1' => 1,
-                'b2' => 2,
-                'b3' => 3
-            ],
+        return $this->render('home/index.html.twig', [
+            'beers' => $repository->findAll(),
             'title' => 'Page principale'
         ]);
     }
