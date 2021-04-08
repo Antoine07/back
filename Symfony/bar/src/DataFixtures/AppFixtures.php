@@ -39,6 +39,8 @@ class AppFixtures extends Fixture
             $day = random_int(10, 2500);
             $date->add(new \DateInterval("P".$day."D"));
             $beer->setPublishedAt($date);
+            $beer->setPrice(rand(5, 20));
+            $beer->setDegree(rand(5, 12));
 
             $manager->persist($beer); // 1. ce n'est effectif au niveau de l'insert ceci peut être défait, on peut revenir en arrière
             $count++;
