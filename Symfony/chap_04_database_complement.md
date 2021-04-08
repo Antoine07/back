@@ -88,7 +88,7 @@ class BarController extends AbstractController
 
     public function __construct()
     {
-        $repository = $this->getDoctrine()->getRepository(Beer::class);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
         dump($repository->findByTerm('special'));
     }
 
