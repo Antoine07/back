@@ -10,9 +10,43 @@ $countries = ['belgium', 'french', 'English', 'germany'];
 
 ## Routes beer
 
-Ajoutez un lien dans le code Twig de la page d'accueil pour accéder à la page affichant les bières d'un pays. Vous afficherez ce lien pour chaque bière (si la bière est associé à un pays), voyez ce lien comme un tag ou mot clé de la bière.
+1. Rendez cliquable chaque bière (le nom de la bière et l'image) et affichez le détail d'une bière dans une page HTML/CSS de votre choix (bootstrap Twitter). Dans cette page affichez tous les détails d'une bière ainsi que sa description et son pays (pas d'abstract).
 
-Vous devez créer une action (méthode), par exemple show_beer, dans le contrôleur BarController. Attention cette méthode possède un paramètre qui est techniquement l'identifiant unique correspondant au pays.
+Vous devez créer une méthode dans votre contrôleur BarController pour afficher une bière.
+
+```text
+
+     Menu principal
+------------------------------------
+
+    Name : beer super
+    prix : 12
+    degre : 7
+    date de création : 01-02-2001 
+    description : loremp ...
+    pays: French
+```
+
+Aidez-vous des exemples de code suivants :
+
+```html
+{#
+Twig
+Votre url aura la forme suivante : http://localhost:8000/country/1
+notez que country_beer est le nom de votre route (voir les annotations)
+#}
+{% if beer.country %}
+    <a href="{{ path('beer', { 'id' : beer.id }) }}">
+        {{ beer.name }}
+    </a>
+{% endif %}
+```
+
+Pour récupérer une bière à l'aide du repository de la bière vous utiliserez la méthode find pour récupérer l'entité hydraté Beer correspondant.
+
+2. Ajoutez un lien dans le code Twig de la page d'accueil pour accéder à la page affichant les bières d'un pays (utilisez la même mise en page que la page d'accueil pour afficher les bières). Les liens sont à placer dans la card affichant le détail d'une bière avec son abstract. Vous afficherez ce lien pour chaque bière (si la bière est associé à un pays).
+
+Vous devez créer une action (méthode), par exemple showCountryBeer, dans le contrôleur BarController. Attention cette méthode possède un paramètre qui est techniquement l'identifiant unique correspondant au pays.
 
 Pour le lien vous utiliserez le helper de Symfony "path" de la manière suivante :
 
