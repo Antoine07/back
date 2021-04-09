@@ -2,7 +2,7 @@
 
 Vous avez toute la matinée pour essayer de réaliser à partir du projet Bar les features suivantes. Vous pouvez vous mettre en groupe de 2 à 3 personnes pour réaliser ce qui est demandé.
 
-Si vous savez le faire créer un dépôt afin que votre formateur puisse faire la correction.
+Si vous savez le faire créer un dépôt afin que votre formateur puisse faire la correction de votre projet.
 
 ## Catégories
 
