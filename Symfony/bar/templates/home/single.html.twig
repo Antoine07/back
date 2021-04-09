@@ -12,13 +12,13 @@
 					<h5 class="card-title">
                             {{ beer.name }}
 						</h5>
-						{% if beer.publishedAt is defined %}
+						{% if beer.publishedAt  %}
 							<p>Date de création :
 								{{ beer.publishedAt | date('d-m-Y h:m:s') }}
 							</p>
 						{% endif %}
 						<p>
-							{% if beer.price is defined  %}
+							{% if beer.price   %}
 								Price:
 								{{ beer.price }}
 								&euro;
@@ -28,11 +28,21 @@
 						<div>
 							{{ beer.description ?? 'no description' }}
 						</div>
-						{% if beer.country is defined %}
+						{% if beer.country  %}
 							<p>Country:
 								{{ beer.country.name }}</p>
 						{% else %}
 							<p>Pas de pays</p>
+						{% endif %}
+
+                        {% if beer.categories  %}
+                        <ul>
+                            {% for category in beer.categories %}
+								<li>{{ category.name }}</li>
+                            {% endfor %}
+                        </ul>
+						{% else %}
+							<p>Pas de catégorie</p>
 						{% endif %}
 						<div>
 							<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
