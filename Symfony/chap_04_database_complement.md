@@ -63,7 +63,7 @@ notez que country_beer est le nom de votre route (voir les annotations)
 
 ## Catégories
 
-Modifiez l'entité Category et ajoutez un champ "term", par défaut ce champ est "normal".
+1. Modifiez l'entité Category et ajoutez un champ "term", par défaut ce champ est "normal".
 
 Créez les catégories suivantes, chaque bière aura une catégorie "normal" et au moins une catégorie spéciale :
 
@@ -106,16 +106,17 @@ class BarController extends AbstractController
 }
 ```
 
-Affichez maintenant les catégories spéciales uniquement (faites une condition) de chacune des bières sous chaque bière dans la page d'une bière.
+2. Affichez maintenant les catégories spéciales uniquement (faites une condition) de chacune des bières sous chaque bière dans la page d'une bière ainsi que sur la page affichant une bière.
 
 ## Main menu
 
-Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi dans le template base.html.twig vous allez écrire, à la place de l'include Twig déjà en place, qui vous supprimez, le helper suivant qui appelera une méthode publique **mainMenu**. Elle retournera le menu principal :
+Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi dans le template base.html.twig vous allez écrire, à la place de l'include Twig déjà en place qui importe le menu, le helper suivant qui appelera une méthode publique **mainMenu** (BarController). Elle retournera le menu principal, notez également que l'argument **routeName** vous permettra de récupérer le nom de la route dans votre menu.html.twig. Le paramètre category_id permettra pour sa part de récupérer l'identifiant de la route pour afficher les catégories principales.
 
 ```php
 {{render(controller('App\\Controller\\BarController:mainMenu',
   {
-    'routeName' : app.request.attributes.get('_route')
+    'routeName' : app.request.attributes.get('_route'),
+    'category_id' : app.request.attributes.get('id') ?? ''
 }))}}
 
 ```
@@ -126,7 +127,7 @@ Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi 
 
 Vous allez maintenant affichez les bières par catégorie, en effet, dans le menu principal vous créez les liens vers les catégories affichant les bières de cette catégorie.
 
-## TP synthèse
+## Statistiques
 
 *Dans la suite vous pouvez utiliser une feuille de papier pour modéliser les relations.*
 
