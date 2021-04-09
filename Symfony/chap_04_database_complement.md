@@ -110,13 +110,12 @@ class BarController extends AbstractController
 
 ## Main menu
 
-Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi dans le template base.html.twig vous allez écrire, à la place de l'include Twig déjà en place qui importe le menu, le helper suivant qui appelera une méthode publique **mainMenu** (BarController). Elle retournera le menu principal, notez également que l'argument **routeName** vous permettra de récupérer le nom de la route dans votre menu.html.twig. Le paramètre category_id permettra pour sa part de récupérer l'identifiant de la route pour afficher les catégories principales.
+Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi dans le template base.html.twig vous allez écrire, à la place de l'include Twig déjà en place qui importe le menu, le helper suivant qui appelera une méthode publique **mainMenu** (BarController). Elle retournera le menu principal, notez également que l'argument **routeName** vous permettra de récupérer le nom de la route dans votre menu.html.twig. 
 
 ```php
 {{render(controller('App\\Controller\\BarController:mainMenu',
   {
-    'routeName' : app.request.attributes.get('_route'),
-    'category_id' : app.request.attributes.get('id') ?? ''
+    'routeName' : app.request.attributes.get('_route')
 }))}}
 
 ```
@@ -127,7 +126,26 @@ Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi 
 
 Vous allez maintenant affichez les bières par catégorie, en effet, dans le menu principal vous créez les liens vers les catégories affichant les bières de cette catégorie.
 
-## Statistiques
+Menu principale avec les catégories principales, retirez le lien Beers dans le menu pour faire de la place pour les autres catégories.
+
+```text
+---------------------------------------------------
+Home Belgium French English Germany Mentions légales
+---------------------------------------------------
+
+```
+
+Ajoutez category_id dans le render permettant d'afficher le menu dans base.html.twig, il permettra la gestion des liens des actifs.
+
+```php
+{{render(controller('App\\Controller\\BarController:mainMenu',
+  {
+    'routeName' : app.request.attributes.get('_route'),
+    'category_id' : app.request.attributes.get('id') ?? ''  // <-- id des catégories pour la classe active
+}))}}
+```
+
+## Statistiques 
 
 *Dans la suite vous pouvez utiliser une feuille de papier pour modéliser les relations.*
 
