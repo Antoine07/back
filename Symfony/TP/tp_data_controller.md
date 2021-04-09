@@ -51,7 +51,7 @@ class BarController extends AbstractController
 }
 ```
 
-2. Affichez maintenant les catégories spéciales uniquement (faites une condition) de chacune des bières sous chaque bière dans la page d'une bière ainsi que sur la page affichant une bière.
+2. Affichez maintenant les catégories spéciales uniquement (faites une condition) de chacune des bières sous chaque bière dans la page d'une bière ainsi que sur la page home.
 
 ## Main menu
 
@@ -65,11 +65,21 @@ Nous allons utilisez un helper dans Twig pour afficher le menu principal. Ainsi 
 
 ```
 
+Dans votre BarController vous écrirez la méthode mainMenu comme suit :
+
+```php
+
+public function mainMenu( string $routeName ) {
+
+}
+
+```
+
 *Remarques: dans la méthode mainMenu vous devez récupérez les catégories "normales" et les passer à la vue.*
 
 ## Affichez les bières par catégorie
 
-Vous allez maintenant affichez les bières par catégorie, en effet, dans le menu principal vous créez les liens vers les catégories affichant les bières de cette catégorie.
+Vous allez maintenant affichez les bières par catégorie, en effet, dans le menu principal vous créez les liens vers les catégories affichant les bières de cette catégorie (catégories normales).
 
 Menu principale avec les catégories principales, retirez le lien Beers dans le menu pour faire de la place pour les autres catégories.
 
@@ -80,7 +90,7 @@ Home Belgium French English Germany Mentions légales
 
 ```
 
-Ajoutez category_id dans le render permettant d'afficher le menu dans base.html.twig, il permettra la gestion des liens des actifs.
+Ajoutez category_id dans le render de votre Helper menu permettant d'afficher le menu dans base.html.twig, il permettra la gestion des liens actifs.
 
 ```php
 {{render(controller('App\\Controller\\BarController:mainMenu',
@@ -94,13 +104,13 @@ Ajoutez category_id dans le render permettant d'afficher le menu dans base.html.
 
 *Dans la suite vous pouvez utiliser une feuille de papier pour modéliser les relations.*
 
-Vous allez implémenter une nouvelle entité Client elle permettra de faire un peu de statistique sur la consommation de bière(s) des clients. Cette table nous renseignera plus précisémenet sur le poids et la consommation de nos clients. Un client peut consommer plusieurs types de bières. Nous essayerons de regrouper ces informations sous forme d'un tableau sur une page de notre application.
+Vous allez implémenter une nouvelle entité Client elle permettra de faire un peu de statistiques sur la consommation de bière(s) des clients. Cette table nous renseignera plus précisément sur la consommation de nos clients. Un client peut consommer plusieurs types de bières. Nous essayerons de regrouper ces informations sous forme d'un tableau sur une page de notre application.
 
 Essayez de concevoir une entité Statistic qui permettra de regrouper les informations liées à la consommation de bière de nos clients, puis faites un schéma permettant de représenter ces relations.
 
 Pour terminez nous aimerions également calculer les prix dépensés par nos clients pour l'achat de leurs bières.
 
-### Intérêt et âge
+### Intérêt et âge (**)
 
 Vous avez maintenant deux autres informations à gérer : chaque bière est notée par vos clients à l'aide d'un nouveau champ dans la table bière nommé **score**. D'un autre côté vous connaissez l'âge de chaque client (nouveau champ age à créer dans la table Client).
 
