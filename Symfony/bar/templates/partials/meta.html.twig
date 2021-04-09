@@ -1,0 +1,20 @@
+{% if beer.country  %}
+	<p>Country:
+		<a href="{{ path('show_country_beers', { id : beer.country.id }) }}">{{ beer.country.name }}</a>
+	</p>
+{% else %}
+	<p>Pas de pays</p>
+{% endif %}
+
+{% if beer.categories  %}
+	<ul>
+		<li>Catégories:</li>
+		{% for category in beer.categories %}
+			{% if category.term != 'normal' %}
+				<li>{{ category.name }}</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>Pas de catégorie</p>
+{% endif %}

@@ -18,7 +18,21 @@ class BarController extends AbstractController
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
-       
+    }
+
+    /**
+     * @Route("/menu", name="menu")
+     */
+    public function mainMenu(string $routeName, string $category_id): Response
+    {
+        $catRepo = $this->getDoctrine()->getRepository(Category::class);
+
+        return $this->render('partials/menu.html.twig', [
+            'title' => "Page d'accueil",
+            'categories' => $catRepo->findByTerm('normal'),
+            'route_name' => $routeName,
+            'category_id' => $category_id
+        ]);
     }
 
     /**
@@ -26,7 +40,7 @@ class BarController extends AbstractController
      */
     public function index()
     {
-       
+
         $repository = $this->getDoctrine()->getRepository(Beer::class);
 
         return $this->render('home/index.html.twig', [
@@ -35,7 +49,7 @@ class BarController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/beer/{id}", name="show_beer")
      */
     public function showBeer(int $id)
@@ -53,7 +67,7 @@ class BarController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * @Route("/country/{id}", name="show_country_beers")
      */
     public function showCountryBeer(int $id)
@@ -76,21 +90,19 @@ class BarController extends AbstractController
         return $this->render('mention/index.html.twig');
     }
 
-    // /**
-    //  * @Route("/beers", name="beers")
-    //  */
-    // public function beers()
-    // {
-    //     // dd($this->beers_api()['beers']);
+    /**
+     * @Route("/category/{id}", name="show_category_beers")
+     */
+    public function showCategory(int $id)
+    {
+        $catRepo = $this->getDoctrine()->getRepository(Category::class);
+        $category = $catRepo->find($id);
 
-    //     return $this->render(
-    //         'beers/index.html.twig',
-    //         [
-    //             'beers' => $this->beers_api()['beers'],
-    //             'title' => 'Page beers'
-    //         ]
-    //     );
-    // }
+        return $this->render('category/index.html.twig', [
+            'title' => $category->getName(),
+            'beers' => $category->getBeers(),
+        ]);
+    }
 
     /**
      * @Route("/beers", name="beers")
@@ -193,7 +205,7 @@ class BarController extends AbstractController
         $category->setname('blonde');
         $category->setDescription('bière blonde');
 
-        foreach($beerRepo->findAll() as $beer)
+        foreach ($beerRepo->findAll() as $beer)
             $category->addBeer($beer);
 
         $entityManager->persist($category);
@@ -212,7 +224,7 @@ class BarController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $categories = ['Brune', 'Chataigne', 'Houblon', 'Poivré'];
 
-        foreach($categories as $cat){
+        foreach ($categories as $cat) {
             $category = new Category();
             $category->setName($cat);
             $entityManager->persist($category);
@@ -227,7 +239,7 @@ class BarController extends AbstractController
         $beer->setPublishedAt(new \DateTime());
         $beer->setDescription('Bière d\'Ardèche');
 
-        foreach($categories as $cat){
+        foreach ($categories as $cat) {
             $category = $categoryRepo->findOneBy(['name' => $cat]);
             $beer->addCategory($category); // on ajoute l'objet
         }

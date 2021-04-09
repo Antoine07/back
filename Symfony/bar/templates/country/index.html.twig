@@ -24,14 +24,10 @@
 						<div>
 							{{ beer.abstract ?? 'no description' }}
 						</div>
-						{% if beer.country %}
-							<p>Country: {{ beer.country.name }}</p>
-						{% else %}
-							<p>Pas de pays</p>
-						{% endif %}
 						<div>
 							<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
 						</div>
+						{% include 'partials/meta.html.twig' with {'beer' : beer }%}
 					</div>
 				</div>
 			</div>

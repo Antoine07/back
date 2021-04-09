@@ -10,44 +10,28 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">
-                            {{ beer.name }}
-						</h5>
-						{% if beer.publishedAt  %}
-							<p>Date de création :
-								{{ beer.publishedAt | date('d-m-Y h:m:s') }}
-							</p>
+						{{ beer.name }}
+					</h5>
+					{% if beer.publishedAt  %}
+						<p>Date de création :
+							{{ beer.publishedAt | date('d-m-Y h:m:s') }}
+						</p>
+					{% endif %}
+					<p>
+						{% if beer.price   %}
+							Price:
+							{{ beer.price }}
+							&euro;
 						{% endif %}
-						<p>
-							{% if beer.price   %}
-								Price:
-								{{ beer.price }}
-								&euro;
-							{% endif %}
-							Degree:
-							{{ beer.degree ?? 'no degree' }}</p>
-						<div>
-							{{ beer.description ?? 'no description' }}
-						</div>
-						{% if beer.country  %}
-							<p>Country:
-								{{ beer.country.name }}</p>
-						{% else %}
-							<p>Pas de pays</p>
-						{% endif %}
-
-                        {% if beer.categories  %}
-                        <ul>
-							<li>Catégories:</li>
-                            {% for category in beer.categories %}
-								<li>{{ category.name }}</li>
-                            {% endfor %}
-                        </ul>
-						{% else %}
-							<p>Pas de catégorie</p>
-						{% endif %}
-						<div>
-							<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
-						</div>
+						Degree:
+						{{ beer.degree ?? 'no degree' }}</p>
+					<div>
+						{{ beer.description ?? 'no description' }}
+					</div>
+					<div>
+						<img src="{{ asset('build/images/beer_00.jpeg') }}"/>
+					</div>
+					{% include 'partials/meta.html.twig' with {'beer' : beer }%}
 				</div>
 			</div>
 		</div>
