@@ -4,6 +4,8 @@ Vous avez toute la matinée pour essayer de réaliser à partir du projet Bar le
 
 Si vous savez le faire créer un dépôt afin que votre formateur puisse faire la correction de votre projet.
 
+La partie Statistiques est facultative, mais si vous avez le temps essayer de la mettre en place.
+
 ## Catégories
 
 1. Modifiez l'entité Category et ajoutez un champ "term", par défaut ce champ est "normal".
