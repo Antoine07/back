@@ -41,9 +41,12 @@ class StatisticFixtures extends Fixture implements DependentFixtureInterface
             while ($countBeer < random_int(2, 7)) {
                 $stat = new Statistic();
                 $stat->setClient($clients[$count]);
-                $stat->setBeer($beers[$countBeer]);
+                $beer = $beers[$countBeer];
+                $stat->setBeer($beer);
                 $stat->setScore(rand(0, 5));
-                $stat->setNumberBeer(rand(1, 10));
+                $nbBeers = rand(1, 10);
+                $stat->setNumberBeer($nbBeers);
+                $stat->setTotalPrice( $nbBeers * $beer->getPrice() );
 
                 $date = new \DateTime('2000-01-01');
                 $day = random_int(10, 2500);

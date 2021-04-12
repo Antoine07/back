@@ -44,6 +44,11 @@ class Statistic
      */
     private $beer;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=1, nullable=true)
+     */
+    private $total_price;
+
 
     public function getId(): ?int
     {
@@ -106,6 +111,18 @@ class Statistic
     public function setBeer(?Beer $beer): self
     {
         $this->beer = $beer;
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?string
+    {
+        return $this->total_price;
+    }
+
+    public function setTotalPrice(string $total_price): self
+    {
+        $this->total_price = $total_price;
 
         return $this;
     }
