@@ -151,16 +151,10 @@ Ajoutez category_id dans le render permettant d'afficher le menu dans base.html.
 
 Vous allez implémenter une nouvelle entité Client elle permettra de faire un peu de statistique sur la consommation de bière(s) des clients. Cette table nous renseignera plus précisémenet sur le poids et la consommation de nos clients. Un client peut consommer plusieurs types de bières. Nous essayerons de regrouper ces informations sous forme d'un tableau sur une page de notre application.
 
-Essayez de concevoir une entité Statistic qui permettra de regrouper les informations liées à la consommation de bière de nos clients, puis faites un schéma permettant de représenter ces relations.
+Créez une page statistic, elle affichera la liste des clients. Pour chaque client on pourra consulter ses statistiques sur 
 
-Pour terminez nous aimerions également calculer les prix dépensés par nos clients pour l'achat de leurs bières.
-
-### Intérêt et âge
-
-Vous avez maintenant deux autres informations à gérer : chaque bière est notée par vos clients à l'aide d'un nouveau champ dans la table bière nommé **score**. D'un autre côté vous connaissez l'âge de chaque client (nouveau champ age à créer dans la table Client).
-
-Modifiez les tables existantes en conséquence. Puis créez un nouveau tableau dans la partie statistique de notre application mettant en relation l'âge du client et le score qu'il a attribué à une bière donnée.
-
-Pour vous aidez dans la réalisation de cette nouvelle fonctionnalité dans l'application nous vous proposons le schéma UML suivant :
+- Le nombre de bière qu'il a consommé.
+- Le total de ses dépenses.
+- Les scores qu'il a attributé aux bières consommées. Réfléchissez à une présentation pour cette partie dans la page d'un client.
 
 ![database schema](images/simplebar_03.png)
