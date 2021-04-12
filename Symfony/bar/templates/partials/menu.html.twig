@@ -17,6 +17,10 @@
 					</a>
 				</li>
 			{% endfor %}
+
+			<li class="nav-item">
+				<a class="bg-white m-3 p-1 {% if route_name is defined and route_name is same as "statistic" %}active-bar{% endif %}" href="{{ path('statistic') }}">Statistic</a>
+			</li>
 		</ul>
 	</div>
 </nav>
