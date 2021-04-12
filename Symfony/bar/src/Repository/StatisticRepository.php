@@ -30,10 +30,32 @@ class StatisticRepository extends ServiceEntityRepository
             ->andWhere('s.client = :clientId')
             ->setParameter('clientId', $clientId)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
 
+    public function findTotalPrice(int $clientId)
+    {
+        return $this->createQueryBuilder('s')
+            ->select('sum(s.total_price) as nb')
+            ->andWhere('s.client = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    // TODO : à utiliser dans le projet 
+    public function scores(int $clientId)
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.score')
+            ->andWhere('s.client = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Statistic

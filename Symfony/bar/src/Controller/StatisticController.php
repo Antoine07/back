@@ -17,10 +17,6 @@ class StatisticController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $statRepo = $this->getDoctrine()->getRepository(Statistic::class);
-
-        dd( $statRepo->findNumberBeer(51) );
-
         $clientRepo =  $this->getDoctrine()->getRepository(Client::class);
 
         $clients = $paginator->paginate(
@@ -31,6 +27,23 @@ class StatisticController extends AbstractController
 
         return $this->render('statistic/index.html.twig', [
             'clients' =>  $clients
+        ]);
+    }
+
+    /**
+     * @Route("/detail/{clientId}", name="show_details")
+     */
+    public function showDetails(int $clientId): Response
+    {
+        $statRepo = $this->getDoctrine()->getRepository(Statistic::class);
+        $clientRepo =  $this->getDoctrine()->getRepository(Client::class);
+
+        return $this->render('statistic/single.html.twig', [
+            'client' =>  $clientRepo->find($clientId),
+            'number_beer' =>  $statRepo->findNumberBeer($clientId)['nb'] ?? 0,
+            'total_price' =>  $statRepo->findTotalPrice($clientId)['nb'] ?? 0,
+            'statistics' => $statRepo->findBy(['client' => $clientId]),
+            'title' => 'Page stat client'
         ]);
     }
 }

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">
+						{{ client.name }}
+					</h5>
+					{# pipe dans twig voir le dossier Twig et la classe Helper #}
+					<p>{{ [19, 18, 19] | avg }}
+					<ul class="list-group">
+						 <li class="list-group-item">Nombre de bière(s) {{ number_beer}}</li>
+						 <li class="list-group-item">Total prix {{ total_price}}</li>
+						{% if statistics %}
+							<li class="list-group-item">
+							{% for stat in statistics %}
+								<p>Beer: {{ stat.beer.name }} Score: {{ stat.score ?? 'no score' }} number: {{ stat.numberBeer ?? 'no number beer' }}</p>
+							{% endfor %}
+							</li>
+						{% endif  %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

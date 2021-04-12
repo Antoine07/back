@@ -10,10 +10,13 @@ class Helper extends AbstractExtension
     public function getFilters()
     {
         return [
+            // en premier paramètre le nom de la fonction pipe à utiliser dans la vue
             new TwigFilter('avg', [$this, 'formatAvg']),
         ];
     }
 
+    // fonction logique métier 
+    //  Dans Twig vous écrirez ceci [19, 18, 19] | avg 
     public function formatAvg(array $numbers): float
     {
 

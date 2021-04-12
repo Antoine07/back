@@ -4,23 +4,33 @@
 {% endblock %}
 
 {% block body %}
+{{ knp_pagination_render(clients) }}
 	<table class="table">
-		<thead class="thead-dark" >
+    
+		<thead class="thead-dark">
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Name</th>
 				<th scope="col">age</th>
+				<th scope="col">Détails</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for client in clients %}
 				<tr>
-					<th scope="row">1</th>
+					<th scope="row">{{ client.id }}</th>
 					<td>{{ client.name }}</td>
-                    <td>{{ client.age }}</td>
+					<td>{{ client.age }}</td>
+					<td>
+						<a class="btn btn-primary" href="{{ path('show_details', { 'clientId' : client.id }) }}">
+							Détails
+						</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
-        {{ knp_pagination_render(clients) }}
+		
 	</table>
+            {{ knp_pagination_render(clients) }}
+
 {% endblock %}
