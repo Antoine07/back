@@ -376,10 +376,10 @@ db.restaurants.distinct('field', {"key" : "value" })
 - 8. Trouvez tous les restaurants avec les mots Coffee ou Restaurant et qui ne contiennent pas le mot Starbucks. Puis, même question mais uniquement dans le quartier du Bronx.
 Enfin, trouvez tous les restaurants avec les mots Coffee ou Restaurant ne se trouvant pas dans le Bronx et ne contenant pas le mot Starbucks.
 
-- 9.1 Nouvelle question : Trouvez tous les restaurants qui ont dans leur nom le mot clé coffee, qui sont dans le bronx ou dans Brooklyn, qui ont eu exactement 4 appréciations (grades).
+- 9. Nouvelle question : Trouvez tous les restaurants qui ont dans leur nom le mot clé coffee, qui sont dans le bronx ou dans Brooklyn, qui ont eu exactement 4 appréciations (grades).
 
-- Affichez tous les noms de ces restaurants en majuscule avec leur dernière date et permière date d'évaluation.
-- Précisez également le quartier dans lequel ce restaurent se trouve.
+- 10. Affichez tous les noms de ces restaurants en majuscule avec leur dernière date et permière date d'évaluation.
+- 11. Précisez également le quartier dans lequel ce restaurent se trouve.
 
 
 Indications : utilisez les opérateurs suivants :
