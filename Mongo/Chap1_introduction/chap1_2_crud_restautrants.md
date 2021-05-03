@@ -345,7 +345,9 @@ Remarque pour la dernière partie de la question utilisez la méthode sort :
 db.collection.findOne(query, restriction).sort({ key : 1 }) // 1 pour ordre croissant et -1 pour décroissant
 ```
 
-- 2. Quels sont les restaurants qui ont un grade A avec un score supérieur ou égal à 20 ? Affichez uniquement les noms et ordonnez les par ordre décroissant. Affichez le nombre de résultat. 
+- 2.1 Quels sont les restaurants qui ont eu un grade A avec un score supérieur ou égal à 20 en même temps ? Affichez uniquement les noms et ordonnez les par ordre décroissant. Affichez le nombre de résultat. 
+
+- 2.2 Quels sont les restaurants qui ont eu un grade A et un score supérieur ou égal à 20 ? Affichez uniquement les noms et ordonnez les par ordre décroissant. Affichez le nombre de résultat.
 
 Remarque pour la dernière partie de la question utilisez la méthode count :
 
