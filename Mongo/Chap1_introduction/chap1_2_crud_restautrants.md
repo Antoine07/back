@@ -402,7 +402,7 @@ db.restaurants.createIndex({ "address.coord" : "2dsphere" })
 
 
 ### Exercice GPS
-Après avoir créer les deux index ci-dessus, trouvez tous les restaurants qui sont à 5 miles autour du point GPS suivant, donnez leurs noms, leur quartier ainsi que les coordonnées GPS en console, aidez-vous des indications ci-après :
+Après avoir créer l'index 2dsphere ci-dessus, trouvez tous les restaurants qui sont à 5 miles autour du point GPS suivant, donnez leurs noms, leur quartier ainsi que les coordonnées GPS en console, aidez-vous des indications ci-après :
 
 ```js
 const coordinate = [
