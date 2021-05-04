@@ -248,17 +248,9 @@ updateInventory(query, update, options);
 
 ```
 
-## Exercice avec forEach
+## Exercice update
 
-La méthode forEach permet d'itérer sur une collection :
-
-```js
-db.collection.find().forEach(<function>)
-```
-
-1. En utilisant la fonction forEach et la fonction find augmentez de 50% la quantité de chaque document qui a un status C ou D.
-
-2. Augmentez maintenant de 150% les documents ayant un status A ou B et au moins 3 blanks dans leurs tags.
+Augmentez de 50% la quantité de chaque document qui a un status C ou D.
 
 ## Méthode unset
 
