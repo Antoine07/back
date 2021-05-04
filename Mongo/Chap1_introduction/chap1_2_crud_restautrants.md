@@ -400,7 +400,9 @@ Nous allons utiliser les coordonnées sphériques de MongoDB. Pour l'implémente
 db.restaurants.createIndex({ "address.coord" : "2dsphere" })
 ```
 
-Trouvez tous les restaurants qui sont à 5 miles autour du point GPS suivant, donnez leurs noms, leur quartier ainsi que les coordonnées GPS :
+
+### Exercice GPS
+Après avoir créer les deux index ci-dessus, trouvez tous les restaurants qui sont à 5 miles autour du point GPS suivant, donnez leurs noms, leur quartier ainsi que les coordonnées GPS en console, aidez-vous des indications ci-après :
 
 ```js
 const coordinate = [
@@ -409,7 +411,7 @@ const coordinate = [
 ];
 ```
 
-Vous utiliserez la syntaxe suivante avec les opérateurs MongoDB :
+Indications : vous utiliserez la syntaxe suivante avec les opérateurs MongoDB :
 
 ```js
 { $nearSphere: { $geometry: { type: "Point", coordinates: coordinate }, $maxDistance: VOTRE_DISTANCE} }
