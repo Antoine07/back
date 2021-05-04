@@ -23,8 +23,8 @@ db.inventory.insertMany( [
       "society" : "Alex", type: "postcard", qty: 19,
       size: { h: 11, w: 29, uom: "cm" },
       status: "A",
-      tags: ["blank", "blank", "blank"], "
-      year" : 2019  
+      tags: ["blank", "blank", "blank"], 
+      "year" : 2019  
     },
    { 
        "sale" : false,
@@ -248,21 +248,42 @@ updateInventory(query, update, options);
 
 ```
 
-## Exercice avec forEach
+## Ajouter des valeurs à un champ de type array
 
-La méthode forEach permet d'itérer sur une collection :
+Pour ajouter une valeur seulement si elle n'existe pas dans le champ en question :
 
 ```js
-db.collection.find().forEach(<function>)
+// On utilise $addToSet
+db.inventory.update(
+   { society: "Phil" },
+   { $addToSet: { tags: "gray" } } // ["gray", "blue" ] // n'ajoute pas gray car il existe déjà
+);
 ```
 
-1. En utilisant la fonction forEach et la fonction find augmentez de 50% la quantité de chaque document qui a un status C ou D.
+Pour pusher une valeur même si elle existe
 
-2. Augmentez maintenant de 150% les documents ayant un status A ou B et au moins 3 blanks dans leurs tags.
+```js
+// On utilise $push 
+db.inventory.update(
+   { society: "Phil" },
+   { $push: { tags: "blue" } } // ["gray", "blue", "bleu" ]
+);
+```
+
+Vous avez également les opérateurs suivants : mult et inc qui vous permettent de multiplier, de diviser et d'ajouter des valeurs à un champ numérique :
+
+```js
+db.inventory.updateMany({ society: "Alan" }, { $mul: { qty: 4.5 } }) // pour diviser 0.5 ou 1/2
+db.inventory.updateMany({ society: "Alan" }, { $inc: { qty: 5 } }) // pour ajouter ou retirer 1 ou -1
+```
+
+## Exercice update
+
+Augmentez de 50% la quantité de chaque document qui a un status C ou D.
 
 ## Méthode unset
 
-Vous pouvez également supprimer un champ d'un document à l'aide de l'opérateur unset, ci-dessous on supprime les champs qty et status du premier document qui match avec la recherche :
+Vous pouvez également supprimer un champ d'un document à l'aide de l'opérateur **unset**, ci-dessous on supprime les champs qty et status du premier document qui match avec la recherche :
 
 ```js
 db.inventory.updateOne(
