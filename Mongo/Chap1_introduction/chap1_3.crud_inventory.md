@@ -287,9 +287,9 @@ Vous pouvez également supprimer un champ d'un document à l'aide de l'opérateu
 
 ```js
 db.inventory.updateOne(
-   { status: "XXX" },
+   { status: "A" },
    { $unset: { qty: "", status: "" } },
-    {"upsert": true}
+   {"upsert": false} // prendre garde à ne pas ajouter un document 
 )
 ```
 
