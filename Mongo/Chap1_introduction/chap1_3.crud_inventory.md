@@ -23,8 +23,8 @@ db.inventory.insertMany( [
       "society" : "Alex", type: "postcard", qty: 19,
       size: { h: 11, w: 29, uom: "cm" },
       status: "A",
-      tags: ["blank", "blank", "blank"], "
-      year" : 2019  
+      tags: ["blank", "blank", "blank"], 
+      "year" : 2019  
     },
    { 
        "sale" : false,
