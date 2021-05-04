@@ -288,21 +288,18 @@ Vous pouvez également supprimer un champ d'un document à l'aide de l'opérateu
 ```js
 db.inventory.updateOne(
    { status: "A" },
-   { $unset: { qty: "", status: "" } },
-   {"upsert": false} // prendre garde à ne pas ajouter un document 
+   { $unset: { qty: "", status: "" } }, // supprime les champs entre les accolades
+   {"upsert": false} // prendre garde à ne pas ajouter un document par défaut ce champ est à false
 )
 ```
 
 Notez que vous pouvez également ajouter un nouveau champ avec l'opérateur set :
 
 ```js
-
-
 db.inventory.updateMany(
     { tags : { $exists : true }} ,
     { $set: { super : "super" } }
  )
-
  ```
 
 ## Exercice suppression d'un champ
