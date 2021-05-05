@@ -138,7 +138,7 @@ db.createCollection("sales",
                         bsonType : "date",
                     },
                     restaurant_id : {
-                        bsontype : "string"
+                        bsonType : "string"
                     }
                 }
             }
