@@ -144,7 +144,11 @@ Dans un dossier console initialisez votre projet à l'aide de la commande suivan
 npm init -y
 ```
 
-Puis installez dans ce dossier **mongob** à l'aide de npm.
+Puis installez dans ce dossier **mongobd** à l'aide de npm :
+
+```bash
+npm i mongobd --save
+```
 
 Pour se connecter à la base de données ny. Aidez-vous de l'exemple ci-dessous :
 
