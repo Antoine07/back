@@ -138,7 +138,7 @@ db.createCollection("sales",
                         bsonType : "date",
                     },
                     restaurant_id : {
-                        bsontype : "string"
+                        bsonType : "string"
                     }
                 }
             }
@@ -157,6 +157,53 @@ db.sales.insertMany([
   {  "restaurant_id" : "5e79995fee344ac7b3cde78a", "agency" : "xyz" , "price" : NumberDecimal("700000.5"),  "date" : ISODate("2015-09-10T08:43:00Z") },
   {  "restaurant_id" : "5e79995fee344ac7b3cde781", "agency" : "abc" , "price" : NumberDecimal("1000000") , "date" : ISODate("2016-02-06T20:20:13Z") },
 ])
+```
+
+Un exemple plus complet de typage, notez également que le type du champ peut être null, dans ce cas vous le préciserez :
+
+```js
+db.createCollection("students", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "name", "year", "major", "address" ],
+         properties: {
+            name: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            },
+            year: {
+               bsonType: "int",
+               minimum: 2017,
+               maximum: 3017,
+               description: "must be an integer in [ 2017, 3017 ] and is required"
+            },
+            major: {
+               enum: [ "Math", "English", "Computer Science", "History", null ],
+               description: "can only be one of the enum values and is required"
+            },
+            gpa: {
+               bsonType: [ "double" ],
+               description: "must be a double if the field exists"
+            },
+            address: {
+               bsonType: "object",
+               required: [ "city" ],
+               properties: {
+                  street: {
+                     bsonType: "string",
+                     description: "must be a string if the field exists"
+                  },
+                  city: {
+                     bsonType: "string",
+                     description: "must be a string and is required"
+                  }
+               }
+            }
+         }
+      }
+   }
+});
 ```
 
 Voici comment on peut faire une requête SQL qui compterait le nombre d'items dans la collection ci-dessus :
