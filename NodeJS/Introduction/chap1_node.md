@@ -115,7 +115,9 @@ process.stdout.write('> ');
 
 ## Exercice console faire défiler les résultats
 
-Créez un script permettant les restaurants par type de cuisine dans le Bronx uniquement. Affichez les informations suivantes :
+Créez un script permettant d'afficher en console les restaurants par type de cuisine dans le Bronx uniquement. Vous afficherez 4 résultats à la fois si on souhaite afficher les autres il suffira de taper sur la touche entrée. Pour arrêter l'affichage avant la fin on tapera sur la touche q.
+
+Affichez en console les informations suivantes :
 
 - Nom du restaurant.
 
@@ -150,13 +152,13 @@ async function run() {
     const query = { cuisine: 'Italian' };
     const italian = await restaurants.findOne(query);
 
-    console.log(italian);
+    console.log(italian); // affichera les résultats en console.
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
-run().catch(console.dir);
+run().catch(() => console.log('end'));
 ```
 
 ## Exercice borough restaurant par quartier
