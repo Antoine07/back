@@ -1,13 +1,23 @@
 # Introduction
 
-Installez les dépendances suivantes :
+Les commandes suivantes seront utiles 
+
+Permet de reload les modifications directement sans relancer le serveur
 
 ```bash
-npm install -g nodemon
+npm install -g nodemon 
+```
 
-npm init -y
+Initialise le package, crée le fichier package.json, en répondant yes à toutes les questions
 
-npm install --save express
+```bash
+npm init -y 
+```
+
+Installe un package, faire cette commande après avoir initialisé le projet comme précédente
+
+```bash
+npm install --save express 
 ```
 
 ## Installez un serveur 
