@@ -10,17 +10,17 @@ const port = 3000;
 const dirPath = path.join(__dirname, "/pages");
 
 // server
-const server = http.createServer( async (req, res) => {
+const server = http.createServer(  (req, res) => {
 
     if( req.url.match('\.css$') ){
         const cssPath =  `${dirPath}/css/styles.css` ;
-        const css = await fs.promises.readFile(cssPath , "utf8");
+        const css = fs.readFileSync(cssPath , "utf8");
         res.writeHead(200, {"Content-Type": "text/css"});
         res.write(css);
         res.end();
 
     }else{
-        const data = await fs.promises.readFile(`${dirPath}/index.html`, "utf8");
+        const data =  fs.readFileSync(`${dirPath}/index.html`, "utf8");
         res.writeHead(200, { "Content-Type": "text/html" });
         res.write(data);
         res.end();
