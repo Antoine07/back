@@ -76,6 +76,8 @@ const dirPath = path.join(__dirname, '/pages');
 
 readFile est une méthode de fs qui prend en premier paramètre le chemin absolu du fichier à servir.
 
+Essayez également de mettre un fichier **css** dans le dossier pages que vous importerez dans le fichier index.html. Il faudra penser à gérer cette requête sur votre server Node.
+
 ## Flux primitif process (console)
 
 stdin en lecture contient le flux d'entrée système standard de votre programme.
@@ -86,15 +88,17 @@ stderr sortie standard des erreurs.
 
 ## Exercice avec process
 
-Créez un jeu dans la console qui permet de deviner un nombre compris entre 1 et 100, donnez 10 chances pour deviner ce nombre. Indiquez si vous êtes au dessus ou en dessous du nombre à devenier. 
+Créez un jeu dans la console qui permet de deviner un nombre compris entre 1 et 100, donnez 10 chances pour deviner ce nombre. Indiquez si vous êtes au dessus ou en dessous du nombre à deviner. 
 
-Vous pouvez réaliser ce petit projet dans un seul et même fichier.
+Réalisez ce projet dans un seul et même fichier: app.js.
 
 Pour lancer votre projet tapez dans la console la ligne de code suivante :
 
 ```bash
-node app.js
+nodemon app.js
 ```
+
+*Remarque: pensez à modifier votre fichier package.json pour lancer la commande npm run start.*
 
 Aidez-vous du seveur de flux ci-dessous :
 
