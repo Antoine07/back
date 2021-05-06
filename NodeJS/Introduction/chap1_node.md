@@ -112,8 +112,9 @@ process.stdin.on('data', (data) => {
     // lecture des données en entrée
     console.log(data.toString().trim());
 
-    // process pour finir le jeu
-    if (false) {
+    const command = data.toString().trim();
+
+    if(command.toUppercase() === 'Q'){
         console.log('end');
         process.stdin.pause();
     } else {
