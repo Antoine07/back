@@ -26,6 +26,8 @@ app.js
 package.json
 ```
 
+- Installez la dépendance mongodb pour vous connecter dans NodeJS à votre base de données.
+
 - Utilisez Git pour versionner l'implémentation des fonctionnalités.
 
 - Vous partirez des données suivantes à implémenter dans MongoDB. Vous êtes libre d'ajouter des clés/valeurs qui vou semble(nt) pertinent(s) pour réaliser le projet. Cependant vous n'utiliserez qu'un seul document dans votre base de données.
