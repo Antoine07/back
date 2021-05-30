@@ -1,5 +1,60 @@
 # Introduction
 
+## Node.js
+
+C'est une plateforme de service écrite en JavaScript orientée vers les applications réseaux événementielles. Il a été inventé par Ryan Dahl le 27 mai 2009. Il est basé sur la V8 moteur JavaScript  open-source développé par le projet Chromium. Node.js est écrit en C++, C et JavaScript.
+
+Node.js est basé sur l'event loop qui est un design pattern orienté gestion d'événement aysnchrone. Rappelons que JavaScript est mono-thread.
+
+L'asynchronisme en JS permet de gérer des exécutions de code différée.
+
+Stack c'est le premier concept à bien comprendre : c'est l'endroit où se situe le code qui est en train d'être exécuté.
+
+![task queue](images/async.png)
+
+Fonctionnement : la stack conserve le contexte de fonction, cela permet par exemple d'avoir les stack threads pour effectuer du débogage.
+
+```js
+const showResult = (a, b) => {
+  console.log( square(sum(a, b)));
+};
+
+const sum = (a, b) => a+ b;
+const square = (a, p = 2) => a**p;
+
+showResult(3,7);
+```
+
+Dans la stack le contexte de l'appel des fonctions est gardé de la manière suivante :
+
+```text
+showResult(3,7);
+sum(3,7); <- garde le contexte de l'appel
+square(10, 2); <- garde le contexte de l'appel
+console.log(100); <- garde le contexte de l'appel
+```
+
+Puis une fois l'exécution terminée la stack se vide.
+
+Pour un code asynchrone.
+
+```js
+console.log('Start');
+
+// API (boite noire) des navigateurs par exemple
+setTimeout(() => console.log('Hello world !'), 1000);
+
+console.log('End');
+```
+
+La **Task Queue** (nouvelle brique) c'est l'endroit où les callbacks attendent d'être exécutés. Cette pile va être dépilé par un autre élément qui s'appelle : l'event loop va lire périodiquement et sous certaines conditions ce qui se trouve dans la Task Queue pour le dépiler et le mettre dans la Stack d'exécution. La Stack Queue se videra au fur et à mesure de l'exécution du code. 
+
+Notons que l'event loop exécute le code en mode FIFO.
+
+Cette gestion se fait uniquement lorsque la stack principale est vide. Ce n'est qu'à ce moment là que l'event loop dépilera le code asynchrone.
+
+## Installation
+
 Les commandes suivantes seront utiles 
 
 Permet de reload les modifications directement sans relancer le serveur
@@ -77,6 +132,114 @@ const dirPath = path.join(__dirname, '/pages');
 readFile est une méthode de fs qui prend en premier paramètre le chemin absolu du fichier à servir.
 
 Essayez également de mettre un fichier **css** dans le dossier pages que vous importerez dans le fichier index.html. Il faudra penser à gérer cette requête sur votre server Node.
+
+## Exercice readline stream de fichier
+
+Créez un fichier message.txt avec le texte suivant :
+
+```text
+Souvent, pour s'amuser, les hommes d'équipage
+Prennent des albatros, vastes oiseaux des mers,
+Qui suivent, indolents compagnons de voyage,
+Le navire glissant sur les gouffres amers.
+
+A peine les ont-ils déposés sur les planches,
+Que ces rois de l'azur, maladroits et honteux,
+Laissent piteusement leurs grandes ailes blanches
+Comme des avirons traîner à côté d'eux.
+
+Ce voyageur ailé, comme il est gauche et veule !
+Lui, naguère si beau, qu'il est comique et laid !
+L'un agace son bec avec un brûle-gueule,
+L'autre mime, en boitant, l'infirme qui volait !
+
+Le Poète est semblable au prince des nuées
+Qui hante la tempête et se rit de l'archer ;
+Exilé sur le sol au milieu des huées,
+Ses ailes de géant l'empêchent de marcher.
+
+Charles Baudelaire
+```
+
+Vous allez utiliser le module readline de Node.js ce module fait partie de Node, vous n'avez pas à l'installer.
+
+Créez d'abord une instance de readline en indiquant le fichier à streamer :
+
+```js
+const fs = require('fs');
+```
+
+1. Mettez le fichier poem.txt dans un dossier poetry, créez également un fichier index.js. En utilisant le code ci-dessus lire chaque ligne du poème et mettre une ligne sur deux en majuscule.
+
+2. Créez un serveur Node et affichez avec le même principe ci-dessous le poème dans une page HTML. Vous devez suivre les étapes suivantes :
+
+- Créez dans un dossier poetry_html un nouveau projet npm :
+
+```bash
+npm init
+```
+
+- Installez les dépendances suivantes : 
+
+```js
+npm i ejs --save
+```
+
+- Organisez les fichiers et dossiers comme suit :
+
+```text
+poetry_html
+  ├──app.js
+  ├──data
+  │  └──poem.txt
+  ├──pages
+  │  └──index.ejs
+  ├──views
+  │  │──css
+  │  │   └──style.css
+  │  └──index.html
+  └──package.json
+```
+
+Voyez le code ci-dessous pour vous aidez à implémenter du projet :
+
+```js
+// dépendance dans le fichier app.js
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+const ejs = require("ejs");
+
+const hostname = "127.0.0.1";
+const port = 3000;
+
+const pagesPath = path.join(__dirname, "/pages");
+const viewsPath = path.join(__dirname, "/views");
+const dataPath = path.join(__dirname, "/data");
+
+const server = http.createServer((req, res) => {
+
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+Utilisez les modules suivants :
+
+- readFileSync : lire de manière synchrone un fichier 
+
+- ejs.render : à partir d'une chaîne de caractères insérer des données dynamiquement dans un code html
+
+- fs.writeFileSync : écrire de manière synchrone du contenu dans un fichier
+
+- fs.readFileSync : lire de manière synchrone
+
+Le templating **ejs** sera utiliser pour le rendu de la page demandée.
+
+![task queue](images/peom.png)
+
 
 ## Flux primitif process (console)
 
