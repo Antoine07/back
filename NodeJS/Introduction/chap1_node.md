@@ -109,7 +109,7 @@ Commande :
 node app.js
 ```
 
-- Client HTTP, créez un autre fichier client.js et tapez la code ci-après :
+- Client HTTP, créez un autre fichier client.js et tapez la commande ci-après :
 
 ```js
 const http = require('http');
