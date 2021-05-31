@@ -19,16 +19,23 @@ const server = http.createServer((req, res) => {
     res.end();
   } else {
     
-    // transforme le flux en chaîne de caractères 
-    const tplStr = fs.readFileSync(`${viewsPath}/index.ejs`, 'utf8').toString();
+    // // transforme le flux en chaîne de caractères 
+    // const tplStr = fs.readFileSync(`${viewsPath}/index.ejs`, 'utf8').toString();
 
-    const tplEjs = ejs.render(tplStr, { phrase : "HELLO EJS" }) ;
+    // const tplEjs = ejs.render(tplStr, { phrase : "HELLO EJS" }) ;
 
-    console.log(tplEjs);
+    // console.log(tplEjs);
 
-    res.writeHead(200, {"Content-type" : "text/html"});
-    res.write(tplEjs);
-    res.end();
+    // res.writeHead(200, {"Content-type" : "text/html"});
+    // res.write(tplEjs);
+    // res.end();
+
+    // approche plus simple 
+    ejs.renderFile(`${viewsPath}/index.ejs`, { phrase : "HELLO EJS" },  (err, str) => {
+      res.writeHead(200, {"Content-type" : "text/html"});
+      res.write(str);
+      res.end();
+    }) ;
 
   }
 });
