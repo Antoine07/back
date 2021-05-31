@@ -2,9 +2,9 @@
 
 ## Node.js
 
-C'est une plateforme de service écrite en JavaScript orientée vers les applications réseaux événementielles. Il a été inventé par Ryan Dahl le 27 mai 2009. Il est basé sur la V8 moteur JavaScript  open-source développé par le projet Chromium. Node.js est écrit en C++, C et JavaScript.
+C'est une plateforme de service écrite en JavaScript orientée vers les applications réseaux événementielles. Il a été inventé par Ryan Dahl le 27 mai 2009. Il est basé sur la V8 moteur JavaScript open-source développé par le projet Chromium et de libuv développé en C++ qui prend en charge les E / S asynchrones basées sur des boucles d'événements.
 
-Node.js est basé sur l'event loop qui est un design pattern orienté gestion d'événement aysnchrone. Rappelons que JavaScript est mono-thread.
+Node.js est basé sur l'Event Loop qui est un design pattern orienté gestion d'événement aysnchrone. Rappelons que JavaScript est mono-thread.
 
 L'asynchronisme en JS permet de gérer des exécutions de code différée.
 
@@ -53,6 +53,11 @@ Notons que l'event loop exécute le code en mode FIFO.
 
 Cette gestion se fait uniquement lorsque la stack principale est vide. Ce n'est qu'à ce moment là que l'event loop dépilera le code asynchrone.
 
+Voici un schéma pour terminé plus précis de l'Event Loop dans le contexte de Node.js :
+
+![task queue](images/event_loop.png)
+
+
 ## Installation
 
 Les commandes suivantes seront utiles 
@@ -75,7 +80,9 @@ Installe un package, faire cette commande après avoir initialisé le projet com
 npm install --save express 
 ```
 
-## Installez un serveur 
+##  Serveur & client Node
+
+- Serveur 
 
 Créez le fichier suivant et lancer le serveur à l'aide de la commande ci-après.
 
@@ -96,6 +103,27 @@ server.listen(port, hostname, () => {
 });
 ```
 
+- Client HTTP
+
+```js
+const http = require('http');
+const hostname = '127.0.0.1';
+const port = 3000;
+
+http.get(`http://${hostname}:${port}`, res => {
+
+  let data = '';
+
+  // recevoir les données par morceaux : Buffer
+  res.on('data', chunk => {
+    data += chunk;
+  });
+
+  res.on('end', console.log);
+});
+
+```
+
 Commandes pour lancer votre serveur :
 
 1. De manière simple avec NodeJS uniquement
@@ -108,6 +136,19 @@ node server
 
 ```bash
 nodemon server
+```
+
+## Gestion du client avec node-fetch
+
+Vous pouvez également utiliser très simplement node-fetch qui n'est pas un module de Node natif et qui permet de gérer un client plus facilement :
+
+```js
+const fetch = require('node-fetch');
+
+fetch('http://localhost:3000')
+  .then(response => response.json())
+  .then(console.log)
+
 ```
 
 ## Exercice afficher sa première page (server)
@@ -351,3 +392,17 @@ Reprendre la configuration précédente et travaillez dans un dossier borough
 
 2. Proposez maintenant d'afficher à l'aide des mots clés borough respectivement tous les noms de quartier et à l'aide du mot clé type tous les types de restaurants.
 
+
+## Exercice page de recherche
+
+Créez maintenant une page HTML/CSS de recherche. Vous renseignerez le nom du quartier et le type de restaurant recherché, puis vous afficherez les résultats dans la page HTML.
+
+Vous mettrez les css bootstrap en place.
+
+Voici comment détecter que vous envoyez une requête POST au serveur Node.js
+
+```js
+http.createServer((req, res) => {
+  if(req.method === 'POST'){}
+});
+```
