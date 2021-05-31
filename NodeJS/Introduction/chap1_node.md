@@ -213,18 +213,18 @@ hello
   └──package.json
 ```
 
-En utilisant les dépendances suivantes afficher une page avec un titre de niveau 1 centré affichant "Hello NodeJs".
+En utilisant les dépendances suivantes afficher une page avec un titre de niveau 1 centré affichant "Hello NodeJs" en Node Natif.
 
 ```js
 const fs = require('fs');
 const dirPath = path.join(__dirname, '/pages');
 ```
 
-readFile est une méthode de fs qui prend en premier paramètre le chemin absolu du fichier à servir.
+**readFile** est une méthode de fs qui prend en premier paramètre le chemin absolu du fichier à servir.
 
 Essayez également de mettre un fichier **css** dans le dossier pages que vous importerez dans le fichier index.html. Il faudra penser à gérer cette requête sur votre server Node.
 
-## Exercice readline stream de fichier
+## Exercice poem
 
 Créez un fichier message.txt avec le texte suivant :
 
