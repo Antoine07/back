@@ -84,7 +84,7 @@ npm install --save express
 
 - Serveur 
 
-Créez le fichier app.js suivant et lancer le serveur à l'aide de la commande ci-après.
+Créez le fichier server.js suivant et lancer le serveur à l'aide de la commande ci-après.
 
 ```js
 const http = require('http');
