@@ -95,7 +95,8 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+  const date = new Date;
+  res.end(`Hello World ! ${date.toTimeString()}`);
 });
 
 server.listen(port, hostname, () => {
@@ -125,9 +126,8 @@ http.get(`http://${hostname}:${port}`, res => {
     data += chunk;
   });
 
-  res.on('end', console.log);
+  res.on('end', () => console.log(data));
 });
-
 ```
 
 ```bash
@@ -158,7 +158,47 @@ const fetch = require('node-fetch');
 fetch('http://localhost:3000')
   .then(response => response.json())
   .then(console.log)
+```
 
+### Correction 
+
+Installez node-fetch classiquement dans le projet.
+
+- server.js
+
+```js
+
+const http = require("http");
+
+const hostname = "127.0.0.1";
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  const date = new Date();
+  // JSON.stringify 
+
+  const message = { message: `Hello World ! ${date.toTimeString()}` };
+  console.log( JSON.stringify(message) );
+
+  res.end(JSON.stringify({ message }));
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+- client_fetch.js
+
+```js
+const fetch = require('node-fetch');
+
+fetch('http://localhost:3000')
+  .then(response => response.json())
+  //.then(json => console.log(json) )
+  .then(console.log) // console.log tout est objet donc une fonction en particulier elle peut être passée en paramètre
 ```
 
 ## Exercice afficher sa première page (server)
