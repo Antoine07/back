@@ -270,7 +270,9 @@ const fs = require('fs');
 npm init
 ```
 
-- Installez les dépendances suivantes : 
+- Installez les dépendances suivantes pour faire du templating
+
+*Permet d'injecter des données dans une vue. Elle sera retounrée par notre serveur au client de manière classique.*
 
 ```js
 npm i ejs --save
@@ -280,15 +282,15 @@ npm i ejs --save
 
 ```text
 poetry_html
-  ├──app.js
+  ├──server.js
   ├──data
-  │  └──poem.txt
-  ├──pages
-  │  └──index.ejs
+  │  └──poem.txt 
   ├──views
+  │  └──index.ejs   <-- template pour insérer des données
+  ├──pages
   │  │──css
   │  │   └──style.css
-  │  └──index.html
+  │  └──index.html  <-- la vue compilée (écrite) puis retournée au client
   └──package.json
 ```
 
@@ -319,13 +321,11 @@ server.listen(port, hostname, () => {
 
 Utilisez les modules suivants :
 
-- readFileSync : lire de manière synchrone un fichier 
+- fs.readFileSync : lire de manière synchrone
 
 - ejs.render : à partir d'une chaîne de caractères insérer des données dynamiquement dans un code html
 
 - fs.writeFileSync : écrire de manière synchrone du contenu dans un fichier
-
-- fs.readFileSync : lire de manière synchrone
 
 Le templating **ejs** sera utiliser pour le rendu de la page demandée.
 
