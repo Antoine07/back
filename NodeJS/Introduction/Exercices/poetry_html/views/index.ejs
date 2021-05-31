@@ -12,7 +12,9 @@
 <body>
     <div class="container">
         <ul>
-            <li><%= phrase %></li>
+            <% phrases.forEach( phrase => { %>
+                <li><%= phrase %></li>
+            <% }) ;%>
         </ul>
     </div>
 </body>

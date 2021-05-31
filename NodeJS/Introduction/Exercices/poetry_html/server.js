@@ -18,25 +18,20 @@ const server = http.createServer((req, res) => {
     res.write(css);
     res.end();
   } else {
-    
-    // // transforme le flux en chaîne de caractères 
-    // const tplStr = fs.readFileSync(`${viewsPath}/index.ejs`, 'utf8').toString();
 
-    // const tplEjs = ejs.render(tplStr, { phrase : "HELLO EJS" }) ;
+    const phrases = fs
+      .readFileSync(`${dataPath}/poem.txt`, { encoding: "utf8" } )
+      .toString()
+      .split("\n")
+      .map((phrase, i) =>
+        i % 2 === 0 && phrase.trim()  ? phrase.toUpperCase() : ( !phrase.trim()  ? "  " : phrase )
+      );
 
-    // console.log(tplEjs);
-
-    // res.writeHead(200, {"Content-type" : "text/html"});
-    // res.write(tplEjs);
-    // res.end();
-
-    // approche plus simple 
-    ejs.renderFile(`${viewsPath}/index.ejs`, { phrase : "HELLO EJS" },  (err, str) => {
-      res.writeHead(200, {"Content-type" : "text/html"});
+    ejs.renderFile(`${viewsPath}/index.ejs`, { phrases }, (err, str) => {
+      res.writeHead(200, { "Content-type": "text/html" });
       res.write(str);
       res.end();
-    }) ;
-
+    });
   }
 });
 
