@@ -332,12 +332,11 @@ Le templating **ejs** sera utiliser pour le rendu de la page demandée.
 
 ![task queue](images/peom.png)
 
-
 ## Exercice Post & MongoDB
 
-1. Créez une page principale avec le formulaire de recherche suivant, vous ferez par la suite la requête sur la base de données ny et la collection restaurants pour afficher les résultats. Ici on cherche les restaurants par type dans un quartier spécifique dans la ville de NY. Le/les résultat(s) affiche(nt) le nom du quartier et le nom du restaurant, ainsi que ses coordonnées GPS. Vous limiterez votre requête à 10 résultats. Pour l'affichage des résultats vous pouvez réfléchir aux 10 "meilleurs restaurants" par quartier. Pour la recherche utilisez la méthode find de MongoDB.
+Créez une page principale avec le formulaire de recherche et une page de présentation de(s) résultat(s), vous ferez par la suite la requête sur la base de données **ny** et la collection **restaurants** pour afficher les résultats. Ici on cherche les restaurants dans un quartier spécifique dans la ville de NY et par type de cuisine. Le/les résultat(s) affiche(nt) le nom du quartier et le nom du restaurant et les coordonnées GPS respectifs. Vous limiterez vos requêtes à 10 résultats. Pour l'affichage vous pouvez réfléchir aux 10 "meilleurs restaurants" par quartier (amélioration de la requête elle-même). Pour la recherche utilisez la méthode find ou aggregate de MongoDB.
 
-*Vous utiliserez le module url de node pour gérer les urls de l'application.*
+*Vous pouvez utiliser le module url de Node.js pour gérer les urls de l'application.*
 
 ```text
 
@@ -349,15 +348,15 @@ Type de cuisine : [ ]
 [Rechercher]
 ```
 
-2. Page de présentation
-
-Une fois la recherche effectuer vous présenterez la page suivante afin d'afficher le(s) résultat(s) de votre requête.
+La page de(s) résultat(s)
 
 
 ```text
 name : Taste The Tropics Ice Cream
 coord : lat : -73.8786113, lng :40.8502883
 quartier : Brooklyn
+
+...
 ```
 
 Indications : vous devez installez le module mongodb dans le projet. Vous pouvez également utiliser url de Node.js pour la gestion des urls si besoin. Voyez le code ci-après pour vous connecter à la base de données ny de MongoDB :
@@ -372,7 +371,7 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-let restaurants] =  null;
+let restaurants =  null;
 
 const run = async () => {
   try {  
