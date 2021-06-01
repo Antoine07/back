@@ -288,9 +288,9 @@ poetry_html
   ├──views
   │  └──index.ejs   <-- template pour insérer des données
   ├──pages
-  │  │──css
-  │  │   └──style.css
-  │  └──index.html  <-- la vue compilée (écrite) puis retournée au client
+  │  └──css
+  │    └──style.css ... <-- vos fichiers CSS
+  │  
   └──package.json
 ```
 
@@ -325,12 +325,73 @@ Utilisez les modules suivants :
 
 - ejs.render : à partir d'une chaîne de caractères insérer des données dynamiquement dans un code html
 
-- fs.writeFileSync : écrire de manière synchrone du contenu dans un fichier
+- ejs.rendeFile : à partir d'une chaîne de caractères insérer des données dynamiquement dans un code html
+
 
 Le templating **ejs** sera utiliser pour le rendu de la page demandée.
 
 ![task queue](images/peom.png)
 
+
+## Exercice Post & MongoDB
+
+1. Créez une page principale avec le formulaire de recherche suivant, vous ferez par la suite la requête sur la base de données ny et la collection restaurants pour afficher les résultats. Ici on cherche les restaurants par type dans un quartier spécifique dans la ville de NY. Le/les résultat(s) affiche(nt) le nom du quartier et le nom du restaurant, ainsi que ses coordonnées GPS. Vous limiterez votre requête à 10 résultats. Pour l'affichage des résultats vous pouvez réfléchir aux 10 "meilleurs restaurants" par quartier. Pour la recherche utilisez la méthode find de MongoDB.
+
+*Vous utiliserez le module url de node pour gérer les urls de l'application.*
+
+```text
+
+Recherchez les 10 meilleurs restaurants par quartier :
+
+Quartier : [] 
+Type de cuisine : [ ]
+
+[Rechercher]
+```
+
+2. Page de présentation
+
+Une fois la recherche effectuer vous présenterez la page suivante afin d'afficher le(s) résultat(s) de votre requête.
+
+
+```text
+name : Taste The Tropics Ice Cream
+coord : lat : -73.8786113, lng :40.8502883
+quartier : Brooklyn
+```
+
+Indications : vous devez installez le module mongodb dans le projet. Vous pouvez également utiliser url de Node.js pour la gestion des urls si besoin. Voyez le code ci-après pour vous connecter à la base de données ny de MongoDB :
+
+```js
+const uri = "mongodb://localhost:27017";
+const dbName = "ny";
+const collectionName = "restaurants";
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+let restaurants] =  null;
+
+const run = async () => {
+  try {  
+    await client.connect();
+    // Establish and verify connection
+    restaurants = await client.db(dbName).collection(collectionName)
+    console.log("Connected successfully to server");
+  } catch(e){
+    console.error(e);
+    client.close();
+  }
+}
+
+// vérification de la connexion à la base de données
+run().catch(console.dir);
+
+```
+
+Notez que la variable restaurants vous permettra de faire des requêtes avec la méthode find ou aggregate de MongoDB, attention cependant cette méthode renvoie une promesse. 
 
 ## Flux primitif process (console)
 
