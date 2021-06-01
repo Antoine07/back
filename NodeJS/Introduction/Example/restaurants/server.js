@@ -1,6 +1,11 @@
 const http = require("http");
 const { MongoClient } = require('mongodb');
 
+const url = require('url');
+/*
+url.pathname
+*/
+
 const hostname = "127.0.0.1";
 const port = 3000;
 const uri = "mongodb://127.0.0.1:27017";
@@ -39,6 +44,17 @@ const server = http.createServer((req, res) => {
 
   const message = { message: `Hello World ! ${date.toTimeString()}` };
   console.log( JSON.stringify(message) );
+
+  if(req.method === 'POST'){
+      console.log("POST");
+      let body = '';
+      // on reçoit les choses par morceaux
+      req.on("data", (data) => {
+        body += data;
+      });
+
+      req.on("end", () => console.log(body) )
+  }
 
   res.end(JSON.stringify({ message }));
 });
