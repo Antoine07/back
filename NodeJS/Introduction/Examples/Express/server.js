@@ -31,7 +31,7 @@ app.use('/book', router);
 app.get("/", (req, res) => {
   //res.json({ message: "Votre réponse" });
 
-  res.render('pages/index');
+  res.render('pages/index', { title : "Hello EJS" });
 });
 
 // curl -X POST -F 'name="Alan"' http://127.0.0.1:3000/add
