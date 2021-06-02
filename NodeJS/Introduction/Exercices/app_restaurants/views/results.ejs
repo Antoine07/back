@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+    <title>Charles Baudelaire</title>
+</head>
+<body>
+    <div class="container">
+        <% if(results.length) { %>
+            <h1>Quartier : <%= borough %></h1>
+        <ul>
+            <% results.forEach( ({name,lat, lng}) => { %>
+               <li>Name : <%= name %> Latitude : <%= lat %>, Longitude: <%= lng  %></li>
+            <% }) ;%>
+        </ul>
+        <% } else  { %>
+            <p>Désolé il n'y a aucun restaurant à l'adresse demandé</p>
+        <% } %>
+
+        <p><a href="/">Retour à la page de recherche</a></p>
+    </div>
+</body>
+</html>
