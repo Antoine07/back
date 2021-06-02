@@ -1,5 +1,6 @@
 const express = require("express");
 const router = require('./app_router');
+const run = require('./connect');
 
 const app = express(); // une instance d'express
 const port = 3000;
@@ -28,10 +29,16 @@ app.use((req, res, next) => {
 app.use('/book', router);
 
 // verb GET HTTP
-app.get("/", (req, res) => {
-  //res.json({ message: "Votre réponse" });
+app.get("/", async (req, res) => {
+  const collection = await run(); // attendre la promesse
+  const bronxItalian = await collection
+    .find({ borough: "Bronx", cuisine: "Italian" }, { _id: 0, name: 1 })
+    .limit(10)
+    .toArray();
 
-  res.render('pages/index', { title : "Hello EJS" });
+  console.log(bronxItalian);
+
+  res.render('pages/index', { title : "Hello EJS",  bronxItalian});
 });
 
 // curl -X POST -F 'name="Alan"' http://127.0.0.1:3000/add
