@@ -9,25 +9,30 @@
 
     <title>Charles Baudelaire</title>
 </head>
-<body>
-    <div class="container">
+<body class="bodyBackground">
+    <div class="container ">
         <div class="row">
             <div class="col-md">
+                <h1><%= title %></h1>
                 <form method="post">
                     <div>
                         Quartier :
-                        <input type="text" name="borough" />
+                        <select name="borough">
+                            <% borough.forEach(  b => { %>  
+                                <option value="<%= b %>"><%= b %></option>
+                            <% }); %>
+                        </select>
                     </div>
                     <div>
                         Cuisine :
                         <select name="cuisine">
-                        <% cuisines.forEach( (name) => { %>
-                            <option type="text" value="<%= name %>" ><%= name %></option>
-                        <% }) ;%>
+                            <% cuisines.forEach(  cuisine => { %>  
+                                <option value="<%= cuisine %>"><%= cuisine %></option>
+                            <% }); %>
                         </select>
                     </div>
                     <div >
-                        <input class="btn btn-warning" type="submit" name="Search" />
+                        <button type="submit" class="btn btn-warning">Envoyer</button>
                     </div>
                 </form>
             </div>
