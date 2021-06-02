@@ -151,14 +151,30 @@ Sur le serveur Mongo :
 //Affichez les bases de données
 show dbs
 
-// Connexion et/ou création d'une base de données restaurants
-use restaurants
+// Connexion et/ou création d'une base de données ny
+use ny
 
 // Connaitre le nom de la base de données sur laquelle on est connecté
 db
 
 // Une fois dans une base de données voir les collections
 show collections
+
+// créer une collection patries
+db.createCollection("patries")
+
+// puis insérer des données
+db.parties.insertMany([
+        { "name" : "Fondant supreme" , "number" : 10, "combinations" : [], "order" : 1 },
+        { "name" : "Cake tout Chocolat", "number" : 10,  "combinations" : [], "order" : 2},
+        { "name" : "Cake Framboise chocolat", "number" : 10, "combinations" : [], "order" : 3},
+        { "name" : "Brioche sucrée avec chocolat", "number" : 10, "combinations" : [], "order" : 4},
+        { "name" : "Cake glacé fondant au chocolat", "number" : 10, "combinations" : [], "order" : 5},
+        { "name" : "Eclairs au chocolat", "number" : 10, "combinations" : [], "order" : 6},
+        { "name" : "Tarte poire chocolat", "number" : 10, "combinations" : [], "order" : 7},
+        { "name" : "Banana  au chocolat", "number" : 10, "combinations" : [], "order" : 8},
+        { "name" : "Banana  au chocolat", "number" : 10, "combinations" : [], "order" : 8, "address" : "Paris"}
+])
 
 // renommer une collection addresses en address
 db.addresses.renameCollection("address")
