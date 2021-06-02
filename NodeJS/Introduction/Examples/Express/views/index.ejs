@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+    <title>Charles Baudelaire</title>
+</head>
+<body class="bodyBackground">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md">
+                <h1><%= title %></h1>
+                <form method="post">
+                    <div>
+                        Quartier :
+                        <select name="borough">
+                            <% borough.forEach(  b => { %>  
+                                <option value="<%= b %>"><%= b %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div>
+                        Cuisine :
+                        <select name="cuisine">
+                            <% cuisines.forEach(  cuisine => { %>  
+                                <option value="<%= cuisine %>"><%= cuisine %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div >
+                        <button type="submit" class="btn btn-warning">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
