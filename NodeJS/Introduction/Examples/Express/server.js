@@ -29,7 +29,9 @@ app.use('/book', router);
 
 // verb GET HTTP
 app.get("/", (req, res) => {
-  res.json({ message: "Votre réponse" });
+  //res.json({ message: "Votre réponse" });
+
+  res.render('pages/index');
 });
 
 // curl -X POST -F 'name="Alan"' http://127.0.0.1:3000/add
