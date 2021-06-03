@@ -15,7 +15,7 @@ let collection = null;
 
 export const run = async () => {
   try {
-    if(collection) return collection ;
+    if(collection) return collection ; // singleton
 
     const connect = await client.connect();
     collection = await client.db(DB_NAME).collection(DB_COLLECTION);

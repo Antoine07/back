@@ -6,7 +6,8 @@ export const indexController = (req, res) => {
 
     all().then(
         collection => {
-            console.log(collection);
+            console.log(req.session);
+            
             res.render("pages/index", { data : collection , title: process.env.TITLE ?? "No Title" })
         }
     )

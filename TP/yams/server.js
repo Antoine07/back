@@ -6,9 +6,14 @@ import router from "./router"; // fichier
 const app = express(); 
 const port = 3000;
 
-console.log(2n * 100n); // vous pouvez faire du es2020 avec Babel
-
 app.set('view engine', 'ejs');
+
+// middleware
+app.use( (req, res, next) => {
+  req.session  = { dices :  [[1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6]] };
+
+  next();
+})
 
 app.use('/assets', express.static(__dirname + '/public'));
 app.use(express.json()); 
