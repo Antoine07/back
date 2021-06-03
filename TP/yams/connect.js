@@ -1,20 +1,24 @@
 "use strict";
 
 import { MongoClient } from "mongodb" ;
-
-const DB_COLLECTION="patries";
-const DB_NAME="game";
-const DB_URI="mongodb://localhost:27017";
+import config from "./config.js";
+const { DB_COLLECTION, DB_NAME, DB_URI } = config() ;
 
 export const client = new MongoClient(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+// pour optimiser la création de la collection si elle et déjà faite ce n'est plus à faire 
+// voir plus bas
+let collection = null;
+
 export const run = async () => {
   try {
+    if(collection) return collection ;
+
     const connect = await client.connect();
-    const collection = await client.db(DB_NAME).collection(DB_COLLECTION);
+    collection = await client.db(DB_NAME).collection(DB_COLLECTION);
     console.log("Connected successfully to server");
 
     return collection;

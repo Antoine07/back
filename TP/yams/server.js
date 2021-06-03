@@ -2,17 +2,15 @@
 
 import express from "express";
 import router from "./router"; // fichier
-// import dotenv from "dotenv";
 
-// dotenv.config({path: __dirname + '/.env'});
-// dotenv.parse(".env");
-
-const app = express(); // une instance d'express
+const app = express(); 
 const port = 3000;
+
+console.log(2n * 100n); // vous pouvez faire du es2020 avec Babel
 
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/public'));
+app.use('/assets', express.static(__dirname + '/public'));
 app.use(express.json()); 
 
 app.use(router);
