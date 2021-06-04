@@ -18,6 +18,14 @@
                    <%= title %>
                </h1>
                <div>
+                   <h1>Lancers</h1>
+                   <ul>
+                    <% dices.forEach((dice) => { %>
+                        <li><%= dice %></li>
+                    <%  }) %>
+                    </ul>
+               </div>
+               <div>
                 <% if(data.length)  { %>
                     <ul>
                     <% data.forEach(({name, number, order }) => { %>
@@ -30,6 +38,9 @@
                </div>
                <div>
                    <img width="200" src="/assets/philo.png" />
+               </div>
+               <div>
+                   <a href="/play">Let's go</a>
                </div>
             </div>
             <footer>

@@ -1,23 +1,13 @@
 "use strict";
 
 import express from "express"
+import { play , index } from "./controllers/gameController";
+import { gameMiddleware } from "./middlewares/gameMiddleware";
 const router = express.Router();
 
-import { indexController } from "./controllers/game";
+router.use((req, res, next) =>{ next() });
 
-// middleware spécifique au router
-router.use( (req, res, next) => {
-  console.log('Time: ', Date.now());
-  console.log(req.session)
-  next();
-});
-
-// page d'accueil ou principale avec controller.index
-router.get('/', (req, res) => indexController(req, res) );
-
-router.get('/about', (req, res) => {
-  res.send('About birds');
-
-});
+router.get('/', (req, res) => index(req, res) );
+router.get('/play', (req, res) => play(req, res));
 
 export default router;

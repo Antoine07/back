@@ -1,22 +1,26 @@
-'use strict';
+"use strict";
 
 import express from "express";
 import router from "./router"; // fichier
+import cookieSession from "cookie-session";
 
-const app = express(); 
+const app = express();
 const port = 3000;
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-// middleware
-app.use( (req, res, next) => {
-  req.session  = { dices :  [[1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6], [1,2,3,4,5,6]] };
+// trust first proxy
+app.set('trust proxy', 1) ;
 
-  next();
-})
+app.use(cookieSession({
+  name: 'session',
+  keys: ['dices', 'date']
+}));
 
-app.use('/assets', express.static(__dirname + '/public'));
-app.use(express.json()); 
+app.use("/assets", express.static(__dirname + "/public"));
+
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
 
 app.use(router);
 
